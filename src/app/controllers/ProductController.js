@@ -4,8 +4,12 @@ import File from "../models/File";
 
 class ProductController {
   async index(req, res) {
+    const { page = 1 } = req.query;
+
     const products = await Product.findAll({
       attributes: ["id", "nome", "valor", "tempo", "data_inicio"],
+      limit: 20,
+      offset: (page - 1) * 20,
       include: [
         {
           model: File,
