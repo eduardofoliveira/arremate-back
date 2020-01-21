@@ -1,4 +1,5 @@
 const express = require("express");
+import path from "path";
 const app = express();
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
@@ -17,7 +18,11 @@ class App {
 
   middlewares() {
     this.server.use(express.json());
-    this.server.use(require("./middleware/includeMiddleware")(io));
+    this.server.use(
+      "/files",
+      express.static(path.resolve(__dirname, "..", "tmp", "uploads"))
+    );
+    this.server.use(require("./app/middleware/includeMiddleware")(io));
   }
 
   routes() {
