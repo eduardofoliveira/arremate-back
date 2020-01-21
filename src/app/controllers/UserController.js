@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 import User from "../models/User";
-const Op = require("Sequelize").Op;
+const Op = require("sequelize").Op;
 
 class UserController {
   async index(req, res) {
